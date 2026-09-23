@@ -1,0 +1,591 @@
+CSS
+/* Custom Global Variables & Reset */
+:root {
+    --bg-color: #fcfbfa; /* Warm minimalist white background */
+    --text-color: #ff0101; /* Rich charcoal black */
+    --text-muted: #666666;
+    --accent-color: #8c7b6e; /* Warm earth tone */
+    --accent-hover: #6d5e53;
+    --border-color: #e5e2df;
+    --lightbox-bg: rgba(26, 26, 26, 0.95);
+    
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'Lato', Helvetica, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+/* Header & Navigation */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem 5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo a {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.sub-logo {
+    font-weight: 300;
+    font-style: italic;
+    color: var(--accent-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.nav-links a {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+    padding-bottom: 4px;
+    border-bottom: 1px solid transparent;
+    white-space: nowrap;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--accent-color);
+    border-bottom-color: var(--accent-color);
+}
+
+/* Mobile Menu Button */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.menu-toggle .bar {
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+/* Container */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 4rem 5rem;
+    min-height: calc(100vh - 350px);
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+    color: #ff0101
+}
+
+.hero .subtitle {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent-color);
+    font-weight: 300;
+}
+
+/* Category Filters */
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+}
+
+.filter-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    padding: 0.6rem 1.8rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 30px;
+    color: var(--text-muted);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background-color: var(--text-color);
+    border-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+/* Portfolio Grid */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 2.5rem;
+}
+
+/* --- Entry Animations --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Portfolio Gallery Items */
+.portfolio-item {
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    /* Smooth fading and rising action on page load or filter toggle */
+    animation: fadeInUp 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Correctly hides the items from the CSS Grid structure without layout bugs */
+.portfolio-item.hide {
+    display: none !important;
+
+}
+
+
+.image-wrapper {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background-color: #eae7e4;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.05);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 26, 26, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.portfolio-item:hover .overlay {
+    opacity: 1;
+}
+
+.overlay h3 {
+    font-family: var(--font-heading);
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+    font-weight: 400;
+}
+
+.overlay p {
+    color: #e5e2df;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* --- High-Legibility Dark Gallery Lightbox --- */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 10, 10, 0.98); /* Near-opaque solid backdrop */
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.lightbox.show {
+    display: flex;
+    opacity: 1;
+}
+
+.lightbox-content {
+    display: flex;
+    max-width: 1100px;
+    width: 100%;
+    background-color: #111111; /* Opaque solid black backdrop */
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+    border-radius: 6px;
+    overflow: hidden;
+    animation: zoomIn 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    border: 1px solid #222222; /* Subtle outline separation */
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.97); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+#lightbox-img {
+    max-width: 60%;
+    max-height: 80vh;
+    object-fit: cover;
+    background-color: #080808;
+}
+
+.lightbox-info {
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    background-color: #111111; /* Guaranteed opaque text background */
+}
+
+.lightbox-info h2 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+    color: #ffffff; /* Clean white title */
+    letter-spacing: 0.02em;
+}
+
+.lightbox-info p {
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+    color: #aaaaaa; /* Medium gray details */
+    letter-spacing: 0.05em;
+}
+
+#lightbox-desc {
+    font-size: 1.1rem;
+    color: #e5e2df; /* Off-white description text */
+    margin-bottom: 1.8rem;
+    border-bottom: 1px solid #2a2a2a; /* Custom divider line */
+    padding-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 2rem;
+    right: 3rem;
+    font-size: 3rem;
+    color: #ffffff;
+    cursor: pointer;
+    transition: color 0.3s;
+    line-height: 1;
+}
+
+.close-lightbox:hover {
+    color: var(--accent-color);
+}
+
+/* Responsive adjustments for Tablets/Mobile */
+@media (max-width: 900px) {
+    .lightbox-content {
+        flex-direction: column;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    #lightbox-img {
+        max-width: 100%;
+        max-height: 45vh;
+    }
+
+    .lightbox-info {
+        padding: 2.5rem;
+    }
+}
+
+/* About Page Layout */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    align-items: start;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.about-text h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+}
+
+.about-text h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin: 2.5rem 0 1rem;
+    color: var(--accent-color);
+}
+
+.lead {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.statement {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--text-color);
+    border-left: 3px solid var(--accent-color);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.cv-list {
+    list-style: none;
+}
+
+.cv-list li {
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.8rem;
+    font-size: 0.95rem;
+}
+
+/* Contact Page Layout */
+.contact-container {
+    max-width: 800px;
+}
+
+.contact-section h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.contact-section p {
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    background-color: transparent;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--text-color);
+    border-radius: 4px;
+    transition: border-color 0.3s;
+    width: 100%;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.submit-btn {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border: none;
+    padding: 1rem 2rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 4px;
+    align-self: flex-start;
+}
+
+.submit-btn:hover {
+    background-color: var(--accent-color);
+}
+
+/* Footer Section */
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4rem 5rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+}
+
+/* Responsive Grid Adjustments */
+@media (max-width: 1024px) {
+    .navbar { padding: 2rem; }
+    .container { padding: 3rem 2rem; }
+    .portfolio-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    footer { padding: 3rem 2rem; flex-direction: column; gap: 1.5rem; text-align: center; }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle { display: flex; }
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-color);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+        z-index: 1000;
+        text-align: center;
+    }
+    .nav-links.active { display: flex; }
+    .hero h1 { font-size: 2.5rem; }
+    .lightbox-content { flex-direction: column; }
+    #lightbox-img { max-width: 100%; max-height: 50vh; }
+    .lightbox-info { padding: 2rem; }
+}
+
+/* --- Footer Styles --- */
+.site-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem 5rem;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    margin-top: 4rem;
+}
+
+.site-footer p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Controls the shape, size, and matching color of the Instagram SVG logo */
+.instagram-logo {
+    fill: var(--text-color); /* Dynamically uses your project's charcoal/red text variable */
+    transition: fill 0.3s ease, transform 0.3s ease;
+}
+
+/* Changes the logo fill color when a user hovers over it */
+.social-links a:hover .instagram-logo {
+    fill: var(--accent-color); /* Changes to your warm earth tone on hover */
+    transform: scale(1.05);     /* Subtle interactive pop */
+}
+
+/* Mobile responsive alignment adjustment */
+@media (max-width: 768px) {
+    .site-footer {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 2.5rem 2rem;
+        text-align: center;
