@@ -39,21 +39,25 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2.5rem 5rem;
-    border-bottom: 1px solid var(--border-color);
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid #000;
+    
+
 }
 
 .logo a {
     font-family: var(--font-heading);
-    font-size: 1.6rem;
+    font-size: 2em;
     font-weight: 600;
     letter-spacing: 0.05em;
+    color: #ff0101
 }
 
 .sub-logo {
     font-weight: 300;
     font-style: italic;
-    color: var(--accent-color);
+    color: #ff0101
 }
 
 .nav-links {
@@ -117,7 +121,8 @@ a {
     font-weight: 400;
     margin-bottom: 0.5rem;
     letter-spacing: 0.02em;
-    color: #ff0101
+    color: var(--accent-color);
+    
 }
 
 .hero .subtitle {
@@ -126,6 +131,7 @@ a {
     letter-spacing: 0.2em;
     color: var(--accent-color);
     font-weight: 300;
+    font-style: italic;
 }
 
 /* Category Filters */
